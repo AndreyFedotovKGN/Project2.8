@@ -8,6 +8,7 @@ import pro.sky.java.course2.project_2_8.employee.Employee;
 import pro.sky.java.course2.project_2_8.employeeService.EmployeeService;
 
 import java.util.Collection;
+import java.util.List;
 
 @RequestMapping("/employee/")
 @RestController
@@ -62,5 +63,52 @@ public class EmployeeController {
         public Collection<Employee> allEmployees() {
             return employeeService.allEmployee();
         }
+
+    @GetMapping(path = "/office/max-salary")
+    public Object getHighestPaidEmployee(
+            @RequestParam(value = "office") int office) {
+        Employee employee = null;
+        try {
+            employee = employeeService.getHighestPaidEmployee(office);
+        } catch (Throwable e) {
+            return e.getMessage();
+        }
+        return employee;
+    }
+
+    @GetMapping(path = "/office/min-salary")
+    public Object getLowestPaidEmployee(
+            @RequestParam(value = "office") int office) {
+        Employee employee = null;
+        try {
+            employee = employeeService.getLowestPaidEmployee(office);
+        } catch (Throwable e) {
+            return e.getMessage();
+        }
+        return employee;
+    }
+
+    @GetMapping(path = "/office/all", params = "departmentId")
+    public Object printEmployeesForDepartment(
+            @RequestParam(value = "departmentId") int departmentId) {
+        List<Employee> employees = null;
+        try {
+            employees = employeeService.printEmployeesForDepartment(departmentId);
+        } catch (Throwable e) {
+            return e.getMessage();
+        }
+        return employees;
+    }
+
+    @GetMapping(path = "/office/all")
+    public Object printEmployeesByDepartments() {
+        List<Employee> employees = null;
+        try {
+            employees = employeeService.printEmployeesByDepartments();
+        } catch (Throwable e) {
+            return e.getMessage();
+        }
+        return employees;
+    }
 
     }
