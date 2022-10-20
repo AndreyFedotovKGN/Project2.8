@@ -8,13 +8,14 @@ import java.util.stream.Collectors;
 
 @Service
     public class EmployeeServiceImpl implements EmployeeService {
-        private final List<Employee> employees;
+        protected final List<Employee> employees;
 
-        public EmployeeServiceImpl(List<Employee> employees) {
-            this.employees = employees;
-        }
+    public EmployeeServiceImpl(List<Employee> employees) {
+        this.employees = employees;
+    }
 
-        @Override
+
+    @Override
         public Employee addEmployee(String firstName, String lastName, int office, int salary) {
             Employee employee = new Employee(firstName, lastName, office, salary);
             if (employees.contains(employee)) {
@@ -42,38 +43,31 @@ import java.util.stream.Collectors;
         public Collection<Employee> allEmployee() {
             return Collections.unmodifiableList(employees);
         }
-        @Override
-        public Employee getLowestPaidEmployee(int office) {
-            return employees.stream()
-                    .filter(e -> e.getOffice() == office)
-                    .min(Comparator.comparingInt(e -> e.getSalary()))
-                    .orElseThrow(() -> new RuntimeException());
-        }
-
-        @Override
-        public Employee getHighestPaidEmployee(int office) {
-            return employees.stream()
-                    .filter(e -> e.getOffice() == office)
-                    .max(Comparator.comparingInt(e -> e.getSalary()))
-                    .orElseThrow(() -> new RuntimeException());
-        }
 
     @Override
-        public List<Employee> printEmployeesForDepartment(int office) {
-            return employees.stream()
-                    .filter(e -> e.getOffice() == office)
-                    .collect(Collectors.toList());
+    public Employee getLowestPaidEmployee(int office) {
+        return null;
     }
 
-        @Override
-        public List<Employee> printEmployeesByDepartments() {
-            return Collections.unmodifiableList(employees.stream()
-                    .sorted(Comparator.comparingInt(e -> e.getOffice()))
-                    .collect(Collectors.toList()));
-        }
+    @Override
+    public Employee getHighestPaidEmployee(int department) {
+        return null;
+    }
 
-        @Override
-        public List<Employee> printEmployees() {
-            return Collections.unmodifiableList(employees);
-        }
+    @Override
+    public List<Employee> printEmployeesForDepartment(int office) {
+        return null;
+    }
+
+    @Override
+    public List<Employee> printEmployeesByDepartments() {
+        return null;
+    }
+
+    @Override
+    public List<Employee> printEmployees() {
+        return null;
+    }
+
+
 }

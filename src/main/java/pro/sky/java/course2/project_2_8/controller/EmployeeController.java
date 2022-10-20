@@ -64,51 +64,35 @@ public class EmployeeController {
             return employeeService.allEmployee();
         }
 
-    @GetMapping(path = "/office/max-salary")
-    public Object getHighestPaidEmployee(
+    @GetMapping(path = "/max-salary")
+    public Employee getHighestPaidEmployee(
             @RequestParam(value = "office") int office) {
         Employee employee = null;
-        try {
-            employee = employeeService.getHighestPaidEmployee(office);
-        } catch (Throwable e) {
-            return e.getMessage();
-        }
+        employee = employeeService.getHighestPaidEmployee(office);
         return employee;
     }
 
-    @GetMapping(path = "/office/min-salary")
-    public Object getLowestPaidEmployee(
+    @GetMapping(path = "/min-salary")
+    public Employee getLowestPaidEmployee(
             @RequestParam(value = "office") int office) {
         Employee employee = null;
-        try {
-            employee = employeeService.getLowestPaidEmployee(office);
-        } catch (Throwable e) {
-            return e.getMessage();
-        }
+        employee = employeeService.getLowestPaidEmployee(office);
         return employee;
     }
 
     @GetMapping(path = "/office/all", params = "departmentId")
-    public Object printEmployeesForDepartment(
+    public Employee printEmployeesForDepartment(
             @RequestParam(value = "departmentId") int departmentId) {
         List<Employee> employees = null;
-        try {
-            employees = employeeService.printEmployeesForDepartment(departmentId);
-        } catch (Throwable e) {
-            return e.getMessage();
-        }
-        return employees;
+        employees = employeeService.printEmployeesForDepartment(departmentId);
+        return (Employee) employees;
     }
 
-    @GetMapping(path = "/office/all")
-    public Object printEmployeesByDepartments() {
+    @GetMapping(path = "/all")
+    public Employee printEmployeesByDepartments() {
         List<Employee> employees = null;
-        try {
-            employees = employeeService.printEmployeesByDepartments();
-        } catch (Throwable e) {
-            return e.getMessage();
-        }
-        return employees;
+        employees = employeeService.printEmployeesByDepartments();
+        return (Employee) employees;
     }
 
-    }
+}
