@@ -44,30 +44,5 @@ import java.util.stream.Collectors;
             return Collections.unmodifiableList(employees);
         }
 
-    @Override
-    public Employee getLowestPaidEmployee(int office) {
-        return null;
-    }
-
-    @Override
-    public Employee getHighestPaidEmployee(int department) {
-        return null;
-    }
-
-    @Override
-    public List<Employee> printEmployeesForDepartment(int office) {
-        return null;
-    }
-
-    @Override
-    public List<Employee> printEmployeesByDepartments() {
-        return null;
-    }
-
-    @Override
-    public List<Employee> printEmployees() {
-        return null;
-    }
-
 
 }

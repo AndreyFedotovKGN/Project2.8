@@ -9,47 +9,47 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class EmployeeServiceOffice extends EmployeeServiceImpl {
+public class EmployeeServiceOffice {
 
+    private final EmployeeServiceImpl employeeServiceImpl;
 
-    public EmployeeServiceOffice(List<Employee> employees) {
-        super(employees);
+    public EmployeeServiceOffice(EmployeeServiceImpl employeeServiceImpl) {
+        this.employeeServiceImpl = employeeServiceImpl;
     }
 
-    @Override
     public Employee getLowestPaidEmployee(int office) {
-
-        return employees.stream()
+        return employeeServiceImpl.employees.stream()
                 .filter(e -> e.getOffice() == office)
                 .min(Comparator.comparingInt(e -> e.getSalary()))
                 .orElseThrow(() -> new RuntimeException());
     }
 
-    @Override
+
     public Employee getHighestPaidEmployee(int office) {
-        return employees.stream()
+        return employeeServiceImpl.employees.stream()
                 .filter(e -> e.getOffice() == office)
                 .max(Comparator.comparingInt(e -> e.getSalary()))
                 .orElseThrow(() -> new RuntimeException());
     }
 
-    @Override
-    public List<Employee> printEmployeesForDepartment(int office) {
-        return employees.stream()
+
+    public List<Employee> printEmployeesForOffice(int office) {
+        return employeeServiceImpl.employees.stream()
                 .filter(e -> e.getOffice() == office)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Employee> printEmployeesByDepartments() {
-        return Collections.unmodifiableList(employees.stream()
+
+    public List<Employee> printEmployeesByOffice() {
+        return Collections.unmodifiableList(employeeServiceImpl.employees.stream()
                 .sorted(Comparator.comparingInt(e -> e.getOffice()))
                 .collect(Collectors.toList()));
     }
 
-    @Override
+
     public List<Employee> printEmployees() {
-        return Collections.unmodifiableList(employees);
+        return (List<Employee>) employeeServiceImpl.allEmployee().
+                stream().collect(Collectors.groupingBy(Employee::getOffice));
     }
 }
 

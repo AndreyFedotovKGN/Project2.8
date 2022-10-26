@@ -14,14 +14,4 @@ public interface EmployeeService {
     Employee findEmployee(String firstName, String lastName);
 
     Collection<Employee> allEmployee();
-
-    Employee getLowestPaidEmployee(int office);
-
-    Employee getHighestPaidEmployee(int department);
-
-    List<Employee> printEmployeesForDepartment(int office);
-
-    List<Employee> printEmployeesByDepartments();
-
-    List<Employee> printEmployees();
 }

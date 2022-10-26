@@ -8,7 +8,6 @@ import pro.sky.java.course2.project_2_8.employee.Employee;
 import pro.sky.java.course2.project_2_8.employeeService.EmployeeService;
 
 import java.util.Collection;
-import java.util.List;
 
 @RequestMapping("/employee/")
 @RestController
@@ -63,36 +62,5 @@ public class EmployeeController {
         public Collection<Employee> allEmployees() {
             return employeeService.allEmployee();
         }
-
-    @GetMapping(path = "/max-salary")
-    public Employee getHighestPaidEmployee(
-            @RequestParam(value = "office") int office) {
-        Employee employee = null;
-        employee = employeeService.getHighestPaidEmployee(office);
-        return employee;
-    }
-
-    @GetMapping(path = "/min-salary")
-    public Employee getLowestPaidEmployee(
-            @RequestParam(value = "office") int office) {
-        Employee employee = null;
-        employee = employeeService.getLowestPaidEmployee(office);
-        return employee;
-    }
-
-    @GetMapping(path = "/office/all", params = "departmentId")
-    public Employee printEmployeesForDepartment(
-            @RequestParam(value = "departmentId") int departmentId) {
-        List<Employee> employees = null;
-        employees = employeeService.printEmployeesForDepartment(departmentId);
-        return (Employee) employees;
-    }
-
-    @GetMapping(path = "/all")
-    public Employee printEmployeesByDepartments() {
-        List<Employee> employees = null;
-        employees = employeeService.printEmployeesByDepartments();
-        return (Employee) employees;
-    }
 
 }
